@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Award, GraduationCap, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Award, GraduationCap, X } from 'lucide-react';
 
 // Import award images
 import annualAward2025 from '../assets/Annual Award 2025.jpeg';
@@ -18,10 +18,6 @@ import python2021 from '../assets/Python Object Oriented Certificate 2021.png';
 
 const Achievements = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [awardScroll, setAwardScroll] = useState(0);
-  const [certScroll, setCertScroll] = useState(0);
-  const awardCarouselRef = useRef(null);
-  const certCarouselRef = useRef(null);
 
   // Awards - sorted by year descending
   const awards = [
@@ -96,27 +92,6 @@ const Achievements = () => {
     document.body.style.overflow = 'unset';
   };
 
-  const scrollCarousel = (direction, type) => {
-    const scrollAmount = 400;
-    const currentScroll = type === 'award' ? awardScroll : certScroll;
-    const items = type === 'award' ? awards : certificates;
-    const itemWidth = 320; // w-80 = 320px
-    const gap = 24; // gap-6 = 24px
-    const containerWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const visibleItems = Math.floor(containerWidth / (itemWidth + gap));
-    const maxScroll = Math.max(0, (items.length - visibleItems) * (itemWidth + gap));
-    
-    const newScroll = direction === 'left'
-      ? Math.max(0, currentScroll - scrollAmount)
-      : Math.min(maxScroll, currentScroll + scrollAmount);
-    
-    if (type === 'award') {
-      setAwardScroll(newScroll);
-    } else {
-      setCertScroll(newScroll);
-    }
-  };
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && selectedImage) {
@@ -130,30 +105,28 @@ const Achievements = () => {
     }
   }, [selectedImage]);
 
-  // Calculate max scroll for buttons
-  const getMaxScroll = (type) => {
-    const items = type === 'award' ? awards : certificates;
-    const itemWidth = 320;
-    const gap = 24;
-    const containerWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const visibleItems = Math.max(1, Math.floor((containerWidth - 200) / (itemWidth + gap)));
-    return Math.max(0, (items.length - visibleItems) * (itemWidth + gap));
-  };
+  // Separate main awards and other awards
+  const mainAward = awards.find(award => award.title === 'Annual Award 2025') || awards[0];
+  const otherAwards = awards.filter(award => award.title !== 'Annual Award 2025');
 
-  const awardMaxScroll = getMaxScroll('award');
-  const certMaxScroll = getMaxScroll('cert');
+  // Separate main certificate and other certificates
+  const mainCert = certificates.find(cert => cert.title === 'Java Fullstack Certificate 2025') || certificates[0];
+  const otherCerts = certificates.filter(cert => cert.title !== 'Java Fullstack Certificate 2025');
 
   return (
     <>
-      <section id="achievements" className="section-padding bg-gradient-to-b from-white via-primary-50/30 to-white dark:from-secondary-900 dark:via-primary-950/20 dark:to-secondary-900 relative overflow-hidden">
+      <section
+        id="achievements"
+        className="py-14 md:py-16 lg:py-20 px-3 sm:px-4 lg:px-6 bg-gradient-to-b from-white via-primary-50/30 to-white dark:from-secondary-900 dark:via-primary-950/20 dark:to-secondary-900 relative overflow-hidden"
+      >
         {/* Background decorative elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200/10 dark:bg-primary-800/10 rounded-full blur-3xl -z-10"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary-300/10 dark:bg-primary-700/10 rounded-full blur-3xl -z-10"></div>
 
         <div className="container-custom relative z-10">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Section Header */}
-            <div className="text-center mb-20 fade-in-up">
+            <div className="text-center mb-12 fade-in-up">
               <h2 className="heading-secondary mb-6">
                 <span className="text-gradient">Achievements</span>
               </h2>
@@ -162,8 +135,8 @@ const Achievements = () => {
               </p>
             </div>
 
-            {/* Awards Carousel */}
-            <div className="mb-16 fade-in-up">
+            {/* Awards Bento Grid */}
+            <div className="mb-12 fade-in-up">
               <div className="flex items-center gap-4 mb-8">
                 <div className="p-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl text-white shadow-lg shadow-primary-500/50">
                   <Award className="w-6 h-6" />
@@ -173,68 +146,69 @@ const Achievements = () => {
                 </h3>
               </div>
 
-              <div className="relative">
-                {/* Scroll Buttons */}
-                <button
-                  onClick={() => scrollCarousel('left', 'award')}
-                  disabled={awardScroll === 0}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/90 dark:bg-secondary-800/90 backdrop-blur-md rounded-full shadow-lg hover:bg-white dark:hover:bg-secondary-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 border border-secondary-200/50 dark:border-secondary-700/50"
-                  aria-label="Scroll left"
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Main Award - Large Card */}
+                <div
+                  className="md:col-span-2 md:row-span-2 group cursor-pointer"
+                  onClick={() => openImagePreview(mainAward)}
                 >
-                  <ChevronLeft className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </button>
-
-                <button
-                  onClick={() => scrollCarousel('right', 'award')}
-                  disabled={awardScroll >= awardMaxScroll}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/90 dark:bg-secondary-800/90 backdrop-blur-md rounded-full shadow-lg hover:bg-white dark:hover:bg-secondary-700 transition-all duration-300 hover:scale-110 border border-secondary-200/50 dark:border-secondary-700/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRight className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </button>
-
-                {/* Carousel Container */}
-                <div className="overflow-hidden">
-                  <div
-                    ref={awardCarouselRef}
-                    className="flex gap-6 transition-transform duration-500 ease-out"
-                    style={{ transform: `translateX(-${awardScroll}px)` }}
-                  >
-                    {awards.map((award, index) => (
-                      <div
-                        key={index}
-                        className="flex-shrink-0 w-80 group cursor-pointer"
-                        onClick={() => openImagePreview(award)}
-                      >
-                        <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300">
-                          <div className="relative aspect-[3/4] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
-                            <img
-                              src={award.image}
-                              alt={award.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              onError={(e) => {
-                                e.target.style.display = 'none';
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                              <p className="text-white font-semibold text-sm">{award.title}</p>
-                              <p className="text-white/80 text-xs">{award.year}</p>
-                            </div>
-                          </div>
-                          <div className="p-4">
-                            <p className="font-semibold text-secondary-900 dark:text-white mb-1">{award.title}</p>
-                            <p className="text-sm text-secondary-600 dark:text-secondary-400">{award.year}</p>
-                          </div>
+                  <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                    <div className="relative h-full min-h-[320px] md:min-h-[360px] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
+                      <img
+                        src={mainAward.image}
+                        alt={mainAward.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 px-4 py-4 md:px-5">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Award className="w-5 h-5 text-primary-400" />
+                          <span className="text-xs font-semibold text-primary-400 uppercase tracking-wider">Featured Award</span>
                         </div>
+                        <p className="text-white font-bold text-lg md:text-2xl">{mainAward.title}</p>
+                        <p className="text-white/90 text-sm md:text-base">{mainAward.year}</p>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
+
+                {/* Other Awards - Smaller Cards */}
+                {otherAwards.map((award, index) => (
+                  <div
+                    key={index}
+                    className="group cursor-pointer"
+                    onClick={() => openImagePreview(award)}
+                  >
+                    <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                      <div className="relative aspect-[4/3] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
+                        <img
+                          src={award.image}
+                          alt={award.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white font-semibold text-sm">{award.title}</p>
+                          <p className="text-white/80 text-xs">{award.year}</p>
+                        </div>
+                      </div>
+                      <div className="px-3 py-2 space-y-0.5">
+                        <p className="font-semibold text-secondary-900 dark:text-white leading-tight">{award.title}</p>
+                        <p className="text-sm text-secondary-600 dark:text-secondary-400 leading-tight">{award.year}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Certificates Carousel */}
+            {/* Certifications Bento Grid */}
             <div className="fade-in-up stagger-1">
               <div className="flex items-center gap-4 mb-8">
                 <div className="p-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl text-white shadow-lg shadow-primary-500/50">
@@ -245,64 +219,65 @@ const Achievements = () => {
                 </h3>
               </div>
 
-              <div className="relative">
-                {/* Scroll Buttons */}
-                <button
-                  onClick={() => scrollCarousel('left', 'cert')}
-                  disabled={certScroll === 0}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/90 dark:bg-secondary-800/90 backdrop-blur-md rounded-full shadow-lg hover:bg-white dark:hover:bg-secondary-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 border border-secondary-200/50 dark:border-secondary-700/50"
-                  aria-label="Scroll left"
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Main Certificate - Large Card */}
+                <div
+                  className="md:col-span-2 md:row-span-2 group cursor-pointer"
+                  onClick={() => openImagePreview(mainCert)}
                 >
-                  <ChevronLeft className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </button>
-
-                <button
-                  onClick={() => scrollCarousel('right', 'cert')}
-                  disabled={certScroll >= certMaxScroll}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/90 dark:bg-secondary-800/90 backdrop-blur-md rounded-full shadow-lg hover:bg-white dark:hover:bg-secondary-700 transition-all duration-300 hover:scale-110 border border-secondary-200/50 dark:border-secondary-700/50 disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRight className="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                </button>
-
-                {/* Carousel Container */}
-                <div className="overflow-hidden">
-                  <div
-                    ref={certCarouselRef}
-                    className="flex gap-6 transition-transform duration-500 ease-out"
-                    style={{ transform: `translateX(-${certScroll}px)` }}
-                  >
-                    {certificates.map((cert, index) => (
-                      <div
-                        key={index}
-                        className="flex-shrink-0 w-80 group cursor-pointer"
-                        onClick={() => openImagePreview(cert)}
-                      >
-                        <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300">
-                          <div className="relative aspect-[3/4] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
-                            <img
-                              src={cert.image}
-                              alt={cert.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              onError={(e) => {
-                                e.target.style.display = 'none';
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                              <p className="text-white font-semibold text-sm">{cert.title}</p>
-                              <p className="text-white/80 text-xs">{cert.year}</p>
-                            </div>
-                          </div>
-                          <div className="p-4">
-                            <p className="font-semibold text-secondary-900 dark:text-white mb-1">{cert.title}</p>
-                            <p className="text-sm text-secondary-600 dark:text-secondary-400">{cert.year}</p>
-                          </div>
+                  <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                    <div className="relative h-full min-h-[320px] md:min-h-[360px] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
+                      <img
+                        src={mainCert.image}
+                        alt={mainCert.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 right-0 px-4 py-4 md:px-5">
+                        <div className="flex items-center gap-2 mb-2">
+                          <GraduationCap className="w-5 h-5 text-primary-400" />
+                          <span className="text-xs font-semibold text-primary-400 uppercase tracking-wider">Featured Certificate</span>
                         </div>
+                        <p className="text-white font-bold text-lg md:text-2xl">{mainCert.title}</p>
+                        <p className="text-white/90 text-sm md:text-base">{mainCert.year}</p>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
+
+                {/* Other Certificates - Smaller Cards */}
+                {otherCerts.map((cert, index) => (
+                  <div
+                    key={index}
+                    className="group cursor-pointer"
+                    onClick={() => openImagePreview(cert)}
+                  >
+                    <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                      <div className="relative aspect-[4/3] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-white font-semibold text-sm">{cert.title}</p>
+                          <p className="text-white/80 text-xs">{cert.year}</p>
+                        </div>
+                      </div>
+                      <div className="px-3 py-2 space-y-0.5">
+                        <p className="font-semibold text-secondary-900 dark:text-white leading-tight">{cert.title}</p>
+                        <p className="text-sm text-secondary-600 dark:text-secondary-400 leading-tight">{cert.year}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

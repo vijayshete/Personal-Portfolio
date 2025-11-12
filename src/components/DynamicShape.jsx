@@ -73,7 +73,7 @@ const DynamicShape = ({ children }) => {
   };
 
   return (
-    <div className={`relative w-80 h-80 md:w-96 md:h-96 ${getShapeClasses()} bg-gradient-to-br ${getGradientClasses()} p-1 shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-700 ease-out ${getAnimationClasses()}`}>
+    <div className={`relative w-80 h-80 md:w-96 md:h-96 ${getShapeClasses()} bg-gradient-to-br ${getGradientClasses()} p-1 shadow-2xl transform hover:rotate-3 transition-all duration-300 ease-out ${getAnimationClasses()}`}>
       <div className="w-full h-full bg-white dark:bg-secondary-800 rounded-full overflow-hidden">
         {children}
       </div>
