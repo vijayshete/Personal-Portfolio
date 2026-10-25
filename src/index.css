@@ -14,11 +14,6 @@
     overflow-x: hidden;
   }
 
-  /* Smooth scrolling with bubble-like easing */
-  * {
-    scroll-behavior: smooth;
-  }
-
   /* Custom scrollbar with purple theme */
   ::-webkit-scrollbar {
     width: 10px;
@@ -40,26 +35,44 @@
 }
 
 @layer components {
-  /* Glassmorphism utilities */
+  /* Solid fills. Backdrop blur stays on the fixed header only (.glass-strong). */
   .glass {
-    @apply backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10;
+    @apply bg-secondary-100/80 dark:bg-white/10 border border-secondary-200/70 dark:border-white/10;
   }
   
   .glass-strong {
-    @apply backdrop-blur-lg bg-white/20 dark:bg-white/10 border border-white/30 dark:border-white/20;
+    @apply backdrop-blur-lg bg-white/70 dark:bg-secondary-900/70 border border-white/30 dark:border-white/10;
   }
   
   .glass-card {
-    @apply backdrop-blur-md bg-white/80 dark:bg-secondary-800/80 border border-secondary-200/50 dark:border-secondary-700/50;
+    @apply bg-white/90 dark:bg-secondary-800/95 border border-secondary-200/50 dark:border-secondary-700/50 shadow-md;
   }
 
-  /* Button styles with modern effects */
+  /* Buttons move with transform only. Gradient stops swap without a shadow animation. */
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl hover:shadow-primary-500/50 active:scale-95;
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-xl;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
   }
   
   .btn-secondary {
-    @apply bg-white/80 dark:bg-secondary-800/80 hover:bg-white dark:hover:bg-secondary-700 text-secondary-800 dark:text-secondary-100 font-semibold py-3 px-6 rounded-xl border border-secondary-200 dark:border-secondary-700 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg active:scale-95;
+    @apply bg-white/90 dark:bg-secondary-800/95 hover:bg-white dark:hover:bg-secondary-700 text-secondary-800 dark:text-secondary-100 font-semibold py-3 px-6 rounded-xl border border-secondary-200 dark:border-secondary-700;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .btn-secondary:hover {
+    transform: scale(1.02);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.98);
   }
   
   .section-padding {
@@ -91,18 +104,16 @@
     scroll-behavior: smooth;
   }
 
-  /* Bubble-like hover effects */
   .bubble-hover {
-    @apply transition-all duration-300 ease-out;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .bubble-hover:hover {
-    @apply transform scale-105 shadow-lg;
+    transform: translateY(-2px);
   }
 
-  /* Smooth section transitions */
   .section-transition {
-    @apply transition-all duration-700 ease-out;
+    transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1), transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   /* Scroll-triggered animation classes */
@@ -311,7 +322,27 @@
     }
   }
 
-  /* Dynamic shape animations */
+  /* Photo clip only. border-radius and transform stay on separate keyframes. */
+  .shape-clip {
+    animation: shapeMorph 22s ease-in-out infinite, shapeBreathe 22s ease-in-out infinite;
+  }
+
+  .hero-glow {
+    background:
+      radial-gradient(ellipse 55% 45% at 18% 22%, rgba(216, 180, 254, 0.55), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 82% 78%, rgba(192, 132, 252, 0.32), transparent 72%);
+  }
+
+  .dark .hero-glow {
+    background:
+      radial-gradient(ellipse 55% 45% at 18% 22%, rgba(88, 28, 135, 0.5), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 82% 78%, rgba(107, 33, 168, 0.35), transparent 72%);
+  }
+
+  .shape-dynamic {
+    animation: shapeRotate 20s linear infinite, shapeMorph 22s ease-in-out infinite;
+  }
+
   .shape-rotate {
     animation: shapeRotate 20s linear infinite;
   }
@@ -327,7 +358,16 @@
 
   /* Morphing shape animation */
   .shape-morph {
-    animation: shapeMorph 8s ease-in-out infinite;
+    animation: shapeMorph 22s ease-in-out infinite;
+  }
+
+  @keyframes shapeBreathe {
+    0%, 100% {
+      transform: scale(0.94);
+    }
+    50% {
+      transform: scale(1.06);
+    }
   }
 
   @keyframes shapeMorph {
@@ -375,14 +415,36 @@
     }
   }
 
-  /* 3D hover effect */
-  .hover-3d {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .hover-lift {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .hover-3d:hover {
-    transform: translateY(-8px) rotateX(5deg);
-    box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3);
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .t-transform {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .t-opacity {
+    transition: opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .t-colors {
+    transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .t-ui {
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .t-label {
+    transition: top 200ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms cubic-bezier(0.22, 1, 0.36, 1), font-size 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .t-field {
+    transition: border-color 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   /* Stagger animation delay utilities */

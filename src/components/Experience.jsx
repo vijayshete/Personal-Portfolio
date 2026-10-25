@@ -4,18 +4,36 @@ const Experience = () => {
   const experiences = [
     {
       company: "Persistent Systems",
-      position: "Senior Software Engineer",
-      location: "CTO Unit",
-      duration: "Jun 2022 – Present",
+      position: "Lead Software Engineer",
+      location: "Pune, India",
+      duration: "Jan 2026 – Present",
       achievements: [
-        "Designed and delivered the PiBox App frontend using React.js, scaling to support over 250 teams and 2,000+ participants. Utilized micro-frontend architecture for modularity and scalability.",
-        "Delivered fully functioning frontend and API integration for Doc-Intel using React.js, completing the project in record time and earning praise for efficiency and quality.",
-        "Developed frontend and integrated advanced APIs for AI applications, including LLM streaming APIs for Netsynx (an agentic AI network management tool for real-time AI-driven operations) and A2A protocol APIs for Agent Studio (a low-code platform for seamless AI agent communication).",
-        "Enhanced UI scalability and reduced load times by 30% through lazy loading, code splitting, and caching, improving Core Web Vitals scores.",
-        "Collaborated closely with designers and backend developers to ensure pixel-perfect designs and consistent user experiences across devices and browsers.",
-        "Participated in code reviews and implemented React-Jest-DOM testing, reducing critical issues by 25%. Proficiently used Chrome DevTools for performance analysis and debugging.",
-        "Built Gen AI Studio, a touch-screen web app with animations for an engaging user experience.",
-        "Built and optimized user interfaces for diverse web applications using React.js, Tailwind CSS, and Redux. Delivered dynamic features via reusable components, API integration, and advanced state management."
+        "Led frontend architecture and end-to-end UI delivery for Process Intel, an agentic-AI process intelligence platform recognized with the Annual Award of Excellence.",
+        "Built key frontend capabilities for GenAI Studio, an enterprise GenAI catalogue and demo platform, and received the ACE Individual Award for that contribution.",
+        "Lead frontend delivery for AI and LLM enterprise applications using React, TypeScript, Vite, Tailwind CSS, Azure AD, and MSAL, from discovery and UX through integration, testing, and release.",
+        "Design reusable interfaces for real-time and asynchronous AI workflows, including streamed responses, job polling, agent and workflow visualization, role-based access, and enterprise administration."
+      ],
+    },
+    {
+      company: "Persistent Systems",
+      position: "Senior Software Engineer",
+      location: "Pune, India",
+      duration: "Jul 2024 – Jan 2026",
+      achievements: [
+        "Contributed to Doc-Intel, an intelligent document-processing platform with LLM-powered bounding-box detection. The project received the Annual Award of Excellence.",
+        "Led UI modernization for key platforms, cutting average page load by about 40% and reducing user-reported UI and UX issues by about 80% after release.",
+        "Mentored junior developers on UI and UX standards and React patterns, which accelerated team productivity."
+      ],
+    },
+    {
+      company: "Persistent Systems",
+      position: "Software Engineer",
+      location: "Pune, India",
+      duration: "Jun 2022 – Jul 2024",
+      achievements: [
+        "Completed .NET full-stack engineering training, covering APIs, databases, and application development.",
+        "Built low-code and no-code applications on enterprise platforms and completed the related platform certifications before moving into frontend engineering.",
+        "Built responsive React.js frontends for internal platforms with Redux, Material UI, and Tailwind CSS, integrating REST APIs, WebSockets, and streaming APIs with CTO Unit teams."
       ],
     }
   ];
@@ -43,18 +61,17 @@ const Experience = () => {
             {experiences.map((exp, index) => (
               <div key={index} className="relative fade-in-up">
                 {/* Animated Timeline Line */}
-                <div className="absolute left-8 md:left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-primary-600 to-transparent rounded-full pulse-gentle"></div>
+                <div className="absolute left-8 md:left-12 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-primary-600 to-transparent rounded-full"></div>
                 
                 <div className="relative pl-20 md:pl-24">
                   {/* Animated Timeline Dot */}
-                  <div className="absolute left-4 md:left-8 top-0 w-6 h-6 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full border-4 border-white dark:border-secondary-900 shadow-lg shadow-primary-500/50 pulse-gentle">
-                    <div className="absolute inset-0 bg-primary-400 rounded-full animate-ping opacity-75"></div>
+                  <div className="absolute left-4 md:left-8 top-0 w-6 h-6 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full border-4 border-white dark:border-secondary-900 shadow-md">
+                    <div className="absolute -inset-1 rounded-full ring-2 ring-primary-400/50"></div>
                   </div>
                   
                   {/* Experience Card with 3D hover */}
-                  <div className="glass-card rounded-2xl p-8 md:p-10 hover-3d group relative overflow-hidden">
-                    {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="glass-card rounded-2xl p-8 md:p-10 hover-lift group relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/5 opacity-0 group-hover:opacity-100 t-opacity"></div>
                     
                     <div className="relative z-10">
                       {/* Header */}
@@ -62,7 +79,7 @@ const Experience = () => {
                         <div className="mb-4 sm:mb-0">
                           <div className="flex items-center gap-2 mb-3">
                             <Sparkles className="w-5 h-5 text-primary-500" />
-                            <h3 className="text-2xl md:text-3xl font-bold text-secondary-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                            <h3 className="text-2xl md:text-3xl font-bold text-secondary-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 t-colors">
                               {exp.position}
                             </h3>
                           </div>
@@ -93,10 +110,9 @@ const Experience = () => {
                           {exp.achievements.map((achievement, idx) => (
                             <li key={idx} className="flex items-start space-x-4 group/item">
                               <div className="relative mt-2 flex-shrink-0">
-                                <div className="w-3 h-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full group-hover/item:scale-150 transition-transform duration-300"></div>
-                                <div className="absolute inset-0 bg-primary-400 rounded-full animate-ping opacity-0 group-hover/item:opacity-75"></div>
+                                <div className="w-3 h-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full ring-2 ring-primary-400/40"></div>
                               </div>
-                              <span className="text-secondary-700 dark:text-secondary-300 leading-relaxed text-base md:text-lg group-hover/item:text-secondary-900 dark:group-hover/item:text-white transition-colors duration-300">
+                              <span className="text-secondary-700 dark:text-secondary-300 leading-relaxed text-base md:text-lg group-hover/item:text-secondary-900 dark:group-hover/item:text-white t-colors">
                                 {achievement}
                               </span>
                             </li>

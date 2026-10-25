@@ -1,6 +1,6 @@
 # Vijay Shete - Personal Portfolio
 
-A modern, responsive portfolio website showcasing my skills, experience, and projects as a Software Developer.
+A modern, responsive portfolio website showcasing my skills, experience, and projects as a Lead Software Engineer.
 
 ## 🚀 Features
 

@@ -1,29 +1,29 @@
-import { Code, Palette, Database, Cloud, TestTube, Award } from 'lucide-react';
+import { Code, Layers, Shield, Wrench, Award } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Languages",
-      skills: ["JavaScript", "C++", "C", "Python", "SQL"],
+      title: "Frontend",
+      skills: ["React.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind CSS", "Material UI", "Redux"],
       gradient: "from-blue-500 to-blue-600"
     },
     {
-      icon: <Palette className="w-6 h-6" />,
-      title: "Frontend Development",
-      skills: ["React.js", "Redux", "CSS", "Tailwind CSS", "Material UI", "HTML"],
+      icon: <Layers className="w-6 h-6" />,
+      title: "Architecture & APIs",
+      skills: ["Micro-frontends", "REST APIs", "WebSockets", "Server-Sent Events", "Streaming APIs", "API Integration"],
       gradient: "from-purple-500 to-purple-600"
     },
     {
-      icon: <Database className="w-6 h-6" />,
-      title: "Tools & LCNC Platforms",
-      skills: ["Cursor AI", "Chrome DevTools", "Appian (Basic)", "OutSystems (Basic)", "Power Apps (Basic)"],
+      icon: <Shield className="w-6 h-6" />,
+      title: "Authentication & Testing",
+      skills: ["Azure AD", "MSAL", "Role-Based Access", "Jest", "React Testing Library"],
       gradient: "from-green-500 to-green-600"
     },
     {
-      icon: <Cloud className="w-6 h-6" />,
-      title: "Version Control & Testing",
-      skills: ["Git", "GitHub", "Azure DevOps", "React Jest Dom"],
+      icon: <Wrench className="w-6 h-6" />,
+      title: "Tools",
+      skills: ["Git", "GitHub", "Vite", "Chrome DevTools", "GitHub Copilot", "Cursor"],
       gradient: "from-orange-500 to-orange-600"
     }
   ];
@@ -51,22 +51,22 @@ const Skills = () => {
           </div>
 
           {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          <div className="grid md:grid-cols-2 gap-6 mb-20">
             {skillCategories.map((category, index) => (
               <div
                 key={index}
-                className="glass-card rounded-2xl p-6 hover-3d group relative overflow-hidden transition-all duration-300"
+                className="glass-card rounded-2xl p-6 hover-lift group relative overflow-hidden"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-10 t-opacity`}></div>
                 
                 <div className="relative z-10">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className={`p-3 bg-gradient-to-br ${category.gradient} rounded-xl text-white shadow-lg shadow-primary-500/50 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                    <div className={`p-3 bg-gradient-to-br ${category.gradient} rounded-xl text-white shadow-lg shadow-primary-500/50 t-transform group-hover:scale-[1.06]`}>
                       {category.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-secondary-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-secondary-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 t-colors">
                       {category.title}
                     </h3>
                   </div>
@@ -74,7 +74,7 @@ const Skills = () => {
                     {category.skills.map((skill, skillIndex) => (
                       <span
                         key={skillIndex}
-                        className="px-3 py-1.5 bg-white/50 dark:bg-secondary-800/50 backdrop-blur-sm text-secondary-700 dark:text-secondary-300 rounded-lg text-sm font-medium border border-secondary-200/50 dark:border-secondary-700/50 hover:scale-110 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 cursor-default"
+                        className="px-3 py-1.5 bg-secondary-50 dark:bg-secondary-800 text-secondary-700 dark:text-secondary-300 rounded-lg text-sm font-medium border border-secondary-200/50 dark:border-secondary-700/50 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:border-primary-300 dark:hover:border-primary-700 hover:text-primary-600 dark:hover:text-primary-400 t-colors cursor-default"
                       >
                         {skill}
                       </span>
@@ -83,14 +83,14 @@ const Skills = () => {
                 </div>
                 
                 {/* Decorative corner accent */}
-                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-5 rounded-bl-full transition-opacity duration-300`}></div>
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-5 rounded-bl-full t-opacity`}></div>
               </div>
             ))}
           </div>
 
           {/* Certificates Section */}
-          <div className="glass-card rounded-2xl p-8 md:p-10 hover-3d group relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="glass-card rounded-2xl p-8 md:p-10 hover-lift group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-primary-600/5 opacity-0 group-hover:opacity-100 t-opacity"></div>
             
             <div className="relative z-10">
               <div className="text-center mb-10">
@@ -109,13 +109,12 @@ const Skills = () => {
                 {certificates.map((certificate, index) => (
                   <div
                     key={index}
-                    className="flex items-center space-x-4 p-5 glass rounded-xl border border-primary-200/50 dark:border-primary-800/50 hover:border-primary-400 dark:hover:border-primary-600 hover:scale-105 transition-all duration-300 group/item"
+                    className="flex items-center space-x-4 p-5 glass rounded-xl border border-primary-200/50 dark:border-primary-800/50 hover:border-primary-400 dark:hover:border-primary-600 t-colors group/item"
                   >
                     <div className="relative flex-shrink-0">
-                      <div className="w-3 h-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full group-hover/item:scale-150 transition-transform duration-300"></div>
-                      <div className="absolute inset-0 bg-primary-400 rounded-full animate-ping opacity-0 group-hover/item:opacity-75"></div>
+                      <div className="w-3 h-3 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full ring-2 ring-primary-400/40"></div>
                     </div>
-                    <span className="text-secondary-700 dark:text-secondary-300 font-semibold text-base group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-300">
+                    <span className="text-secondary-700 dark:text-secondary-300 font-semibold text-base group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 t-colors">
                       {certificate}
                     </span>
                   </div>

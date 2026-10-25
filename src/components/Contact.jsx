@@ -73,7 +73,7 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="space-y-8 fade-in-up">
-              <div className="glass-card rounded-2xl p-8 hover-3d">
+              <div className="glass-card rounded-2xl p-8 hover-lift">
                 <div className="flex items-center gap-3 mb-6">
                   <Sparkles className="w-6 h-6 text-primary-500" />
                   <h3 className="text-3xl font-bold text-secondary-900 dark:text-white">
@@ -91,20 +91,20 @@ const Contact = () => {
                 {contactInfo.map((info, index) => (
                   <div
                     key={index}
-                    className="glass-card rounded-xl p-5 hover-3d group cursor-pointer transition-all duration-300"
+                    className="glass-card rounded-xl p-5 hover-lift group relative cursor-pointer overflow-hidden"
                     onClick={() => handleContactClick(info.link)}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-xl`}></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-10 t-opacity rounded-xl`}></div>
                     <div className="flex items-center space-x-4 relative z-10">
-                      <div className={`p-3 bg-gradient-to-br ${info.gradient} rounded-xl text-white shadow-lg shadow-primary-500/50 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                      <div className={`p-3 bg-gradient-to-br ${info.gradient} rounded-xl text-white shadow-lg shadow-primary-500/50 t-transform group-hover:scale-[1.06]`}>
                         {info.icon}
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-secondary-500 dark:text-secondary-400 mb-1">
                           {info.label}
                         </p>
-                        <p className="text-secondary-900 dark:text-white font-semibold text-base group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-300">
+                        <p className="text-secondary-900 dark:text-white font-semibold text-base group-hover:text-primary-600 dark:group-hover:text-primary-400 t-colors">
                           {info.value}
                         </p>
                       </div>
@@ -115,25 +115,25 @@ const Contact = () => {
 
               {/* Quick Stats */}
               <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="glass-card rounded-xl p-6 text-center hover-3d group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="glass-card rounded-xl p-6 text-center hover-lift group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10 opacity-0 group-hover:opacity-100 t-opacity"></div>
                   <div className="relative z-10">
-                    <div className="text-3xl font-bold text-gradient mb-2">3.3+</div>
+                    <div className="text-3xl font-bold text-gradient mb-2">4+</div>
                     <div className="text-sm text-secondary-600 dark:text-secondary-400 font-medium">Years Experience</div>
                   </div>
                 </div>
-                <div className="glass-card rounded-xl p-6 text-center hover-3d group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="glass-card rounded-xl p-6 text-center hover-lift group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-primary-600/10 opacity-0 group-hover:opacity-100 t-opacity"></div>
                   <div className="relative z-10">
-                    <div className="text-3xl font-bold text-gradient mb-2">4+</div>
-                    <div className="text-sm text-secondary-600 dark:text-secondary-400 font-medium">Major Projects</div>
+                    <div className="text-3xl font-bold text-gradient mb-2">10k+</div>
+                    <div className="text-sm text-secondary-600 dark:text-secondary-400 font-medium">PiBox Participants</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
-            <div className="glass-card rounded-2xl p-8 md:p-10 hover-3d fade-in-up stagger-1">
+            <div className="glass-card rounded-2xl p-8 md:p-10 hover-lift fade-in-up stagger-1">
               <div className="flex items-center gap-3 mb-8">
                 <Send className="w-6 h-6 text-primary-500" />
                 <h3 className="text-3xl font-bold text-secondary-900 dark:text-white">
@@ -145,7 +145,7 @@ const Contact = () => {
                 <div className="relative">
                   <label 
                     htmlFor="name" 
-                    className={`absolute left-4 transition-all duration-300 ${
+                    className={`absolute left-4 t-label ${
                       focusedField === 'name' || formData.name
                         ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
                         : 'top-4 text-sm text-secondary-500 dark:text-secondary-400'
@@ -160,7 +160,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     onFocus={() => setFocusedField('name')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 backdrop-blur-sm text-secondary-900 dark:text-white placeholder-transparent transition-all duration-300"
+                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-white placeholder-transparent t-field"
                     placeholder="Your name"
                   />
                 </div>
@@ -168,7 +168,7 @@ const Contact = () => {
                 <div className="relative">
                   <label 
                     htmlFor="email" 
-                    className={`absolute left-4 transition-all duration-300 ${
+                    className={`absolute left-4 t-label ${
                       focusedField === 'email' || formData.email
                         ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
                         : 'top-4 text-sm text-secondary-500 dark:text-secondary-400'
@@ -183,7 +183,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     onFocus={() => setFocusedField('email')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 backdrop-blur-sm text-secondary-900 dark:text-white placeholder-transparent transition-all duration-300"
+                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-white placeholder-transparent t-field"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -191,7 +191,7 @@ const Contact = () => {
                 <div className="relative">
                   <label 
                     htmlFor="subject" 
-                    className={`absolute left-4 transition-all duration-300 ${
+                    className={`absolute left-4 t-label ${
                       focusedField === 'subject' || formData.subject
                         ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
                         : 'top-4 text-sm text-secondary-500 dark:text-secondary-400'
@@ -206,7 +206,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     onFocus={() => setFocusedField('subject')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 backdrop-blur-sm text-secondary-900 dark:text-white placeholder-transparent transition-all duration-300"
+                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-white placeholder-transparent t-field"
                     placeholder="Project discussion"
                   />
                 </div>
@@ -214,7 +214,7 @@ const Contact = () => {
                 <div className="relative">
                   <label 
                     htmlFor="message" 
-                    className={`absolute left-4 transition-all duration-300 ${
+                    className={`absolute left-4 t-label ${
                       focusedField === 'message' || formData.message
                         ? 'top-2 text-xs text-primary-600 dark:text-primary-400'
                         : 'top-4 text-sm text-secondary-500 dark:text-secondary-400'
@@ -229,18 +229,17 @@ const Contact = () => {
                     onChange={handleInputChange}
                     onFocus={() => setFocusedField('message')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 backdrop-blur-sm text-secondary-900 dark:text-white placeholder-transparent resize-none transition-all duration-300"
+                    className="w-full px-4 pt-6 pb-2 border-2 border-secondary-200 dark:border-secondary-700 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white/50 dark:bg-secondary-800/50 text-secondary-900 dark:text-white placeholder-transparent resize-none t-field"
                     placeholder="Tell me about your project or opportunity..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full btn-primary flex items-center justify-center space-x-2 group relative overflow-hidden"
+                  className="w-full btn-primary flex items-center justify-center space-x-2 group"
                 >
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <Send className="w-5 h-5 t-transform group-hover:translate-x-0.5" />
                   <span>Send Message</span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-primary-700 to-primary-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 </button>
               </form>
             </div>

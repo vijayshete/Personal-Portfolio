@@ -50,7 +50,7 @@ export default {
         'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
         'pulse-gentle': 'pulseGentle 3s ease-in-out infinite',
         'shape-rotate': 'shapeRotate 20s linear infinite',
-        'shape-morph': 'shapeMorph 8s ease-in-out infinite',
+        'shape-morph': 'shapeMorph 22s ease-in-out infinite',
         'floating-bubble': 'floatingBubble 4s ease-in-out infinite',
       },
       keyframes: {

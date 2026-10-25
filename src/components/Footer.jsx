@@ -30,19 +30,15 @@ const Footer = () => {
           {/* Main Footer Content */}
           <div className="mb-12 text-center fade-in-up">
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/50">
-                  <span className="text-white font-bold text-sm">VS</span>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl opacity-0 hover:opacity-100 blur-xl transition-opacity duration-300 -z-10"></div>
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-sm">VS</span>
               </div>
               <span className="text-2xl font-bold text-gradient-purple">Vijay Shete</span>
             </div>
             
             <p className="text-secondary-300 max-w-2xl mx-auto leading-relaxed text-lg">
-              Software Developer passionate about creating impactful solutions and delivering 
-              exceptional user experiences. Always eager to take on new challenges and 
-              contribute to innovative projects.
+              Lead Software Engineer building scalable AI and agentic products with React and TypeScript.
+              Focused on real-time enterprise workflows, secure access, and interfaces teams can ship with confidence.
             </p>
           </div>
 
@@ -52,7 +48,7 @@ const Footer = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="px-6 py-2 glass rounded-xl text-secondary-300 hover:text-white hover:bg-primary-600/20 border border-secondary-700/50 hover:border-primary-500/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary-500/20"
+                className="px-6 py-2 rounded-xl text-secondary-300 hover:text-white bg-white/5 hover:bg-primary-600/20 border border-secondary-700/50 hover:border-primary-500/50 t-colors"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {link.label}
@@ -64,22 +60,22 @@ const Footer = () => {
           <div className="border-t border-secondary-800/50 pt-8">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <p className="text-secondary-400 text-sm">
-                © 2024 Vijay Shete. All rights reserved.
+                © 2026 Vijay Shete. All rights reserved.
               </p>
               
               <div className="flex items-center space-x-6">
                 <p className="text-secondary-400 text-sm flex items-center space-x-2">
                   <span>Made with</span>
-                  <Heart className="w-4 h-4 text-red-500 animate-pulse" />
+                  <Heart className="w-4 h-4 text-red-500" />
                   <span>using React & Tailwind</span>
                 </p>
                 
                 <button
                   onClick={scrollToTop}
-                  className="p-3 bg-gradient-to-br from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary-500/50 group"
+                  className="p-3 bg-primary-600 hover:bg-primary-700 rounded-xl t-ui hover:scale-[1.02] active:scale-[0.98] group"
                   aria-label="Scroll to top"
                 >
-                  <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />
+                  <ArrowUp className="w-5 h-5 t-transform group-hover:-translate-y-0.5" />
                 </button>
               </div>
             </div>

@@ -23,7 +23,7 @@ const Achievements = () => {
   const awards = [
     {
       image: annualAward2025,
-      title: 'Annual Award 2025',
+      title: 'Annual Award of Excellence — Doc Intel',
       year: 2025
     },
     {
@@ -106,8 +106,16 @@ const Achievements = () => {
   }, [selectedImage]);
 
   // Separate main awards and other awards
-  const mainAward = awards.find(award => award.title === 'Annual Award 2025') || awards[0];
-  const otherAwards = awards.filter(award => award.title !== 'Annual Award 2025');
+  const recognition = [
+    'Annual Award of Excellence — Process Intel (2026)',
+    'ACE Individual Award — GenAI Studio (2026)',
+    'Annual Award of Excellence — Doc Intel (2025)',
+    'Bravo Team Award (2024, 2025, 2026)',
+    'High Five Team Award (2024, 2025)'
+  ];
+
+  const mainAward = awards.find(award => award.title === 'Annual Award of Excellence — Doc Intel') || awards[0];
+  const otherAwards = awards.filter(award => award.title !== 'Annual Award of Excellence — Doc Intel');
 
   // Separate main certificate and other certificates
   const mainCert = certificates.find(cert => cert.title === 'Java Fullstack Certificate 2025') || certificates[0];
@@ -135,6 +143,19 @@ const Achievements = () => {
               </p>
             </div>
 
+            <div className="mb-10 fade-in-up">
+              <div className="flex flex-wrap justify-center gap-3">
+                {recognition.map((item) => (
+                  <span
+                    key={item}
+                    className="px-4 py-2 glass rounded-full text-sm font-medium text-secondary-700 dark:text-secondary-200 border border-primary-200/60 dark:border-primary-800/60"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {/* Awards Bento Grid */}
             <div className="mb-12 fade-in-up">
               <div className="flex items-center gap-4 mb-8">
@@ -152,12 +173,12 @@ const Achievements = () => {
                   className="md:col-span-2 md:row-span-2 group cursor-pointer"
                   onClick={() => openImagePreview(mainAward)}
                 >
-                  <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                  <div className="glass-card rounded-2xl overflow-hidden hover-lift h-full">
                     <div className="relative h-full min-h-[320px] md:min-h-[360px] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
                       <img
                         src={mainAward.image}
                         alt={mainAward.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-cover t-transform group-hover:scale-[1.04]"
                         onError={(e) => {
                           e.target.style.display = 'none';
                         }}
@@ -182,18 +203,18 @@ const Achievements = () => {
                     className="group cursor-pointer"
                     onClick={() => openImagePreview(award)}
                   >
-                    <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                    <div className="glass-card rounded-2xl overflow-hidden hover-lift h-full">
                       <div className="relative aspect-[4/3] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
                         <img
                           src={award.image}
                           alt={award.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover t-transform group-hover:scale-[1.04]"
                           onError={(e) => {
                             e.target.style.display = 'none';
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 t-opacity"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 t-transform">
                           <p className="text-white font-semibold text-sm">{award.title}</p>
                           <p className="text-white/80 text-xs">{award.year}</p>
                         </div>
@@ -225,12 +246,12 @@ const Achievements = () => {
                   className="md:col-span-2 md:row-span-2 group cursor-pointer"
                   onClick={() => openImagePreview(mainCert)}
                 >
-                  <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                  <div className="glass-card rounded-2xl overflow-hidden hover-lift h-full">
                     <div className="relative h-full min-h-[320px] md:min-h-[360px] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
                       <img
                         src={mainCert.image}
                         alt={mainCert.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="w-full h-full object-cover t-transform group-hover:scale-[1.04]"
                         onError={(e) => {
                           e.target.style.display = 'none';
                         }}
@@ -255,18 +276,18 @@ const Achievements = () => {
                     className="group cursor-pointer"
                     onClick={() => openImagePreview(cert)}
                   >
-                    <div className="glass-card rounded-2xl overflow-hidden hover-3d transition-all duration-300 h-full">
+                    <div className="glass-card rounded-2xl overflow-hidden hover-lift h-full">
                       <div className="relative aspect-[4/3] overflow-hidden bg-secondary-100 dark:bg-secondary-800">
                         <img
                           src={cert.image}
                           alt={cert.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          className="w-full h-full object-cover t-transform group-hover:scale-[1.04]"
                           onError={(e) => {
                             e.target.style.display = 'none';
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 t-opacity"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 t-transform">
                           <p className="text-white font-semibold text-sm">{cert.title}</p>
                           <p className="text-white/80 text-xs">{cert.year}</p>
                         </div>
@@ -287,12 +308,12 @@ const Achievements = () => {
       {/* Full Screen Image Preview Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 fade-in"
           onClick={closeImagePreview}
         >
           <button
             onClick={closeImagePreview}
-            className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full text-white transition-all duration-300 hover:scale-110 z-10"
+            className="absolute top-4 right-4 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white t-colors z-10"
             aria-label="Close preview"
           >
             <X className="w-6 h-6" />
@@ -304,7 +325,7 @@ const Achievements = () => {
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md rounded-lg px-6 py-3 text-white text-center">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 rounded-lg px-6 py-3 text-white text-center">
               <p className="font-semibold">{selectedImage.title}</p>
               <p className="text-sm text-white/80">{selectedImage.year}</p>
             </div>
